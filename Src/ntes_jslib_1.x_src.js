@@ -91,6 +91,7 @@ function extendElems(elems) {
 				}
 			}
 		} else {	// HTMLCollection Or Array
+                    // why change to Array
 			elems = jRaiser.util.extend(jRaiser.util.toArray(elems), jRaiser.element);
 		}
 	}
@@ -119,6 +120,8 @@ jRaiser.retire = function() {
 
 
 // 用于特性检查的元素
+// fake element
+    // a great choice but make a injection
 var testElem = document.createElement("div");
 
 
@@ -570,13 +573,15 @@ var selectorQuery = {
 
 
 // HTML元素扩展操作，用于继承
+    // wrap Orgin Dom into a jRaiser element
 jRaiser.element = {
 	
 	/// 获取指定序号的元素
 	/// @param {Number} 序号
 	/// @return {HTMLElement} 元素
 	get : function(i) {
-		return this.nodeType === undefined ? this[i] : (0 == i ? this : undefined);
+
+        return this.nodeType === undefined ? this[i] : (0 == i ? this : undefined);
 	},
 	
 	/// @overload 获取指定序号并经过扩展的元素
