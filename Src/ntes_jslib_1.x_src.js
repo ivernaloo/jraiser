@@ -580,7 +580,7 @@ jRaiser.element = {
 	/// @param {Number} 序号
 	/// @return {HTMLElement} 元素
 	get : function(i) {
-
+        // type check, but it may be a array, a ObjectCollections
         return this.nodeType === undefined ? this[i] : (0 == i ? this : undefined);
 	},
 	
@@ -590,6 +590,9 @@ jRaiser.element = {
 	/// @overload 以当前元素为上下文通过CSS选择器获取元素
 	///		@param {String} CSS选择器
 	///		@return {HTMLElement,Array} 匹配到的经扩展的HTML元素
+    /*
+    * 两种用途: 1,选取操作对象对应序号的对象。2，选取selector对应的选择符。
+    * */
 	$ : function(selector) {
 		return jRaiser("number" === typeof selector ? this.get(selector) : selector, this);
 	},
@@ -671,6 +674,7 @@ jRaiser.util = {
 	/// 检查变量是否Array类型
 	/// @param {Mixed} 待测变量
 	/// @return {Boolean} 待测变量是否Array类型
+        // great method
 	isArray : function(value) { return toString.call(value) === "[object Array]"; },
 	
 	/// 检查变量是否函数类型
